@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import AuthService from '../services/AuthService';
 
+import '../css/SignUpComponent.css';
+
 class SignUpComponent extends Component {
 
     constructor(props) {
@@ -56,7 +58,7 @@ class SignUpComponent extends Component {
                         <div className="card-header" style={{textAlign: "center"}}>
                             <h4>Register</h4>
                         </div>
-                        {this.state.showSuccessMessage && <div>Signup Sucessful</div>}
+                        {this.state.signUpSucess && <div>Signup Sucessful</div>}
                         <div className="card-body">
                             <form>
                             <div className="form-group row">
