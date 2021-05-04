@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
 import PostService from '../services/PostService';
+import PostTileComponent from './PostTileComponent';
+import SideBarComponent from './SideBarComponent';
+import SubredditSideBarComponent from './SubredditSideBarComponent';
 
 class HomeComponent extends Component {
 
@@ -30,19 +33,22 @@ class HomeComponent extends Component {
 
     render() {
         return (
+            
             <div>
-                {
-                    this.state.posts.map(
-                        (post) => (
-                            <div key={post.id}>
-                            <li> {post.username} </li>
-                            <li> {post.duration} </li>
-                            <li> {post.description} </li>
+                <div className="reddit-body">
+                    <div className="container">
+                        <div className="row">
+                            <hr/>
+                            <div className="col-md-9">
+                                <PostTileComponent posts={this.state.posts}/>
                             </div>
-                        )
-
-                    )
-                }
+                            <div className="col-md-3">
+                                <SideBarComponent/>
+                                <SubredditSideBarComponent/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
