@@ -42,8 +42,6 @@ class LoginComponent extends Component {
             localStorage.setItem('username', res.data.username);
             localStorage.setItem('refreshToken', res.data.refreshToken);
             localStorage.setItem('expiresAt', res.data.expiresAt);
-
-            AuthService.insertToken();
         })
 
     }

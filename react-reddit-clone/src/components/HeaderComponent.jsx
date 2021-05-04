@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
+import AuthService from '../services/AuthService';
 import '../css/HeaderComponent.css';
 
 class HeaderComponent extends Component {
@@ -10,7 +10,28 @@ class HeaderComponent extends Component {
         this.state = {
 
         }
+        this.logout = this.logout.bind(this);
+
     }
+
+    logout = (e) => {
+        e.preventDefault();
+        let logoutInfo = {
+            username: localStorage.getItem('username'),
+            refreshToken: localStorage.getItem('refreshToken')
+        }
+
+        console.log("inputs : " + JSON.stringify(logoutInfo));
+
+        AuthService.logout(logoutInfo).then(res => {
+            console.log(res);
+            localStorage.removeItem('authenticationToken');
+            localStorage.removeItem('username');
+            localStorage.removeItem('refreshToken');
+            localStorage.removeItem('expiresAt');
+        });
+    }
+
     render() {
         return (
             <div>
@@ -34,6 +55,7 @@ class HeaderComponent extends Component {
                     <div className="flex-grow-1 float-right">
                         <Link to="/signup" className="float-right signup mr-2">Sign up</Link>
                         <Link to="/login" className="float-right login mr-2">Login</Link>
+                        <button className="btn btn-danger" onClick={this.logout}>Logout</button>
                     </div>
                 </nav>
                 </header>
