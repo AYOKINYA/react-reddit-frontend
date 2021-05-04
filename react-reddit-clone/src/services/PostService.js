@@ -6,6 +6,9 @@ class PostService {
     getAllPosts() {
         return axios.get(BASE_URL);
     }
+    createPost(post) {
+        return axios.post(BASE_URL, post);
+    }
 
 }
 
