@@ -1,8 +1,25 @@
 import React, { Component } from 'react';
 
+import { withRouter } from 'react-router-dom';
+
 import '../css/SideBarComponent.css';
 
 class SideBarComponent extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.createPost = this.createPost.bind(this);
+        this.createSubreddit = this.createSubreddit.bind(this);
+    }
+
+    createPost() {
+        this.props.history.push('/create-post');
+    }
+
+    createSubreddit() {
+        this.props.history.push('/create-subreddit');
+    }
     render() {
         return (
             <div>
@@ -13,10 +30,10 @@ class SideBarComponent extends Component {
                         Come here to check in with your favorite subreddits.
                     </div>
                     <div style={{textAlign: "center"}}>
-                        <button className="btnCreatePost">Create Post</button>
+                        <button className="btnCreatePost" onClick={this.createPost}>Create Post</button>
                     </div>
                     <div style={{textAlign: "center"}}>
-                        <button className="btnCreateSubreddit">Create Subreddit</button>
+                        <button className="btnCreateSubreddit" onClick={this.createSubreddit}>Create Subreddit</button>
                     </div>
                 </div>
             </div>
@@ -24,4 +41,4 @@ class SideBarComponent extends Component {
     }
 }
 
-export default SideBarComponent;
+export default withRouter(SideBarComponent);

@@ -7,6 +7,10 @@ class SubredditService {
         return axios.get(BASE_URL);
     }
 
+    createSubreddit(subreddit) {
+        return axios.post(BASE_URL, subreddit);
+    }
+
 }
 
 export default new SubredditService();

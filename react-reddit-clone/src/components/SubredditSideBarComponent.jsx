@@ -44,7 +44,7 @@ class SubredditSideBarComponent extends Component {
                     }
                     { this.state.displayViewAll &&
                     <div style={{textAlign: "center"}}>
-                        <Link to="/subreddits" style={{fontWeight: "bold"}} />View All
+                        <Link to="/subreddits-list" style={{fontWeight: "bold"}} />View All
                     </div>
                     }
                 </div>
