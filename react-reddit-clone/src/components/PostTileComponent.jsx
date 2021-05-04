@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link,  withRouter } from 'react-router-dom';
 
 import '../css/PostTileComponent.css';
 import VoteButtonComponent from './VoteButtonComponent';
 
 class PostTileComponent extends Component {
+
+    constructor(props) {
+        super(props);
+        
+        this.viewPost = this.viewPost.bind(this);
+    }
+
+    viewPost(id) {
+        console.log(id);
+        this.props.history.push(`/view-post/${id}`);
+    }
 
     render() {
         return (
@@ -37,7 +48,7 @@ class PostTileComponent extends Component {
                         <hr />
                         <span>
                             <button className="btn btn-success btnComments">Comments({post.commentCount})</button>
-                            <button className="btn btn-info">Read Post</button>
+                            <button className="btn btn-info" onClick={() => this.viewPost(post.id)}>Read Post</button>
                         </span>
                     </div>
                 </div>
@@ -50,4 +61,4 @@ class PostTileComponent extends Component {
     }
 }
 
-export default PostTileComponent;
+export default withRouter(PostTileComponent);

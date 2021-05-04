@@ -10,6 +10,10 @@ class PostService {
         return axios.post(BASE_URL, post);
     }
 
+    getPost(id) {
+        return axios.get(BASE_URL + '/' + id);
+    }
+
 }
 
 export default new PostService();
