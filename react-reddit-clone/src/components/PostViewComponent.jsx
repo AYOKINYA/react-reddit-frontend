@@ -4,6 +4,7 @@ import SideBarComponent from './SideBarComponent';
 import SubredditSideBarComponent from './SubredditSideBarComponent';
 
 import PostService from '../services/PostService';
+import CommentService from '../services/CommentService';
 
 import { Link } from 'react-router-dom';
 
@@ -16,13 +17,46 @@ class PostViewComponent extends Component {
 
         this.state = {
             id: this.props.match.params.id,
-            post: {}
+            post: {},
+            comments: [],
+            text: ''
         }
+
+        this.changeHandler = this.changeHandler.bind(this);
+        this.createComment = this.createComment.bind(this);
     }
 
     componentDidMount() {
         PostService.getPost(this.state.id).then((res) => {
             this.setState({post: res.data});
+        });
+
+        CommentService.getAllCommentsForPost(this.state.id).then((res) => {
+            this.setState({comments: res.data});
+        });
+    }
+
+    changeHandler = (event) => {
+        this.setState({
+            [event.target.name]
+                  :event.target.value
+        });
+    }
+
+    createComment = (e) => {
+        e.preventDefault();
+        let comment = {
+            postId: this.state.id,
+            text: this.state.text
+        }
+
+        console.log("inputs : " + JSON.stringify(comment));
+
+        CommentService.createComment(comment).then(res => {
+            console.log(res);
+            CommentService.getAllCommentsForPost(this.state.id).then((res) => {
+                this.setState({comments: res.data});
+            });
         });
     }
 
@@ -45,7 +79,6 @@ class PostViewComponent extends Component {
                             <div className="col-md-1">
                                 <VoteButtonComponent voteCount={this.state.post.voteCount}/>
                             </div>
-
                             <div className="col-md-11">
                                 <span className="subreddit-info">
                                     <span className="subreddit-text">
@@ -64,8 +97,34 @@ class PostViewComponent extends Component {
                                 <div>
                                     <p className="post-text">{this.state.post.description}</p>
                                 </div>
+
+                                <div className="post-comment">
+                                    <form>
+                                    <div className="form-group">
+                                        <textarea name="text" value={this.state.text} onChange={this.changeHandler} className="form-control" placeholder="Your Thoughts?"></textarea>
+                                    </div>
+                                    <button type="submit" onClick={this.createComment} className="login float-right">Comment</button>
+                                    </form>
+                                    </div>
+                                    <div style={{marginTop: "60px"}}>
+                                        {
+                                            this.state.comments.map(
+                                                (comment) => (
+                                            <div className="comment" key={comment.id}>
+                                            <div className="username">
+                                                <Link to={"/user/" + comment.username}>{comment.userName}</Link>
+                                            </div>
+                                            <div>
+                                                <p>{comment.duration}</p>
+                                            </div>
+                                            <b>{comment.text}</b>
+                                            </div>
+                                            )
+                                        )}
+                                        <hr />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
                         </div>
                         <div className="col-md-3">
                             <SideBarComponent/>
