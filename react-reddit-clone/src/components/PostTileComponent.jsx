@@ -14,7 +14,6 @@ class PostTileComponent extends Component {
     }
 
     viewPost(id) {
-        console.log(id);
         this.props.history.push(`/view-post/${id}`);
     }
 

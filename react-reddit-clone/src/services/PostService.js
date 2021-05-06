@@ -14,6 +14,10 @@ class PostService {
         return axios.get(BASE_URL + '/' + id);
     }
 
+    getAllPostsByUser(username) {
+        return axios.get(BASE_URL + '/by-user/' + username);
+    }
+
 }
 
 export default new PostService();

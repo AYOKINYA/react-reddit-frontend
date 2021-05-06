@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import AuthService from '../services/AuthService';
 import '../css/HeaderComponent.css';
+
+import {Dropdown} from 'react-bootstrap';
 
 class HeaderComponent extends Component {
     constructor(props) {
@@ -9,8 +11,12 @@ class HeaderComponent extends Component {
 
         this.state = {
 
+            isLoggedIn: (localStorage.getItem("refreshToken") != null),
+            username: localStorage.getItem("username")
+
         }
         this.logout = this.logout.bind(this);
+        this.goToUserProfile = this.goToUserProfile.bind(this);
 
     }
 
@@ -32,6 +38,25 @@ class HeaderComponent extends Component {
         });
     }
 
+    goToUserProfile(username) {
+        this.props.history.push(`/user-profile/${username}`);
+    }
+
+    CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+        <a
+          href=""
+          ref={ref}
+          onClick={(e) => {
+            e.preventDefault();
+            onClick(e);
+          }}
+        >
+          <img className="account-icon" src="https://www.redditstatic.com/avatars/avatar_default_08_D4E815.png"></img>
+          {children}
+        </a>
+      ));
+      
+
     render() {
         return (
             <div>
@@ -52,11 +77,31 @@ class HeaderComponent extends Component {
                             </span>
                         </Link>
                     </div>
+
+                    {this.state.isLoggedIn &&
+                    <div className="flex-grow-1 float-right">
+
+                    <Dropdown>
+                        <Dropdown.Toggle as={this.CustomToggle} id="dropdown-custom-components"  className="userdetails">
+                        {this.state.username}
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                        <Dropdown.Item eventKey="profile" onSelect={() => this.goToUserProfile(this.state.username)}>Profile</Dropdown.Item>
+                        <Dropdown.Item eventKey="logout" onSelect={this.logout}>Logout</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                    </div>
+                    
+                    }
+                   
+                    { !(this.state.isLoggedIn) &&
                     <div className="flex-grow-1 float-right">
                         <Link to="/signup" className="float-right signup mr-2">Sign up</Link>
                         <Link to="/login" className="float-right login mr-2">Login</Link>
-                        <button className="btn btn-danger" onClick={this.logout}>Logout</button>
                     </div>
+                    }
+
                 </nav>
                 </header>
                 
@@ -65,4 +110,4 @@ class HeaderComponent extends Component {
     }
 }
 
-export default HeaderComponent;
+export default withRouter(HeaderComponent);

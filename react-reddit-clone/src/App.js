@@ -8,6 +8,7 @@ import CreatePostComponent from './components/CreatePostComponent';
 import CreateSubredditComponent from './components/CreateSubredditComponent';
 import SubredditListComponent from './components/SubredditListComponent';
 import PostViewComponent from './components/PostViewComponent';
+import UserProfileComponent from './components/UserProfileComponent';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
               <Route path="/create-subreddit" component={CreateSubredditComponent}></Route>
               <Route path="/subreddits-list" component={SubredditListComponent}></Route>
               <Route path="/view-post/:id" component={PostViewComponent}></Route>
+              <Route path="/user-profile/:username" component={UserProfileComponent}></Route>
             </Switch>
           </div>
         </div>

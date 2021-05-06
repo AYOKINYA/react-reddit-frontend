@@ -11,6 +11,10 @@ class CommentService {
         return axios.post(BASE_URL, comment);
     }
 
+    getAllCommentsByUser(username) {
+        return axios.get(BASE_URL + '/by-user/' + username);
+    }
+
 }
 
 export default new CommentService();
