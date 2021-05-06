@@ -43,10 +43,8 @@ class CreatePostComponent extends Component {
             url: this.state.url
         }
 
-        console.log("inputs : " + JSON.stringify(post));
-
         PostService.createPost(post).then(res => {
-            console.log(res);
+            this.props.history.push('/home');
         })
 
     }

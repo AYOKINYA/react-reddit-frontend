@@ -19,7 +19,7 @@ class VoteButtonComponent extends Component {
     
     vote(votetype){
 
-        if (votetype != "UPVOTE" && votetype != "DOWNVOTE")
+        if (votetype !== "UPVOTE" && votetype !== "DOWNVOTE")
         {
             alert("What kind of vote is this?");
             return ;
@@ -33,14 +33,12 @@ class VoteButtonComponent extends Component {
         console.log("inputs : " + JSON.stringify(vote));
 
         VoteService.Vote(vote).then(res => {
-            console.log(res);
             this.updateVoteStatus();
         });
     }
 
     updateVoteStatus() {
         PostService.getPost(this.state.post.id).then(res => {
-            console.log(res);
             this.setState({post: res.data});
         });
     }

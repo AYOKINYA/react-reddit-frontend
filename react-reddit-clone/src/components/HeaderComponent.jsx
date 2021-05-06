@@ -20,8 +20,7 @@ class HeaderComponent extends Component {
 
     }
 
-    logout = (e) => {
-        e.preventDefault();
+    logout() {
         let logoutInfo = {
             username: localStorage.getItem('username'),
             refreshToken: localStorage.getItem('refreshToken')
@@ -30,7 +29,7 @@ class HeaderComponent extends Component {
         console.log("inputs : " + JSON.stringify(logoutInfo));
 
         AuthService.logout(logoutInfo).then(res => {
-            console.log(res);
+
             localStorage.removeItem('authenticationToken');
             localStorage.removeItem('username');
             localStorage.removeItem('refreshToken');

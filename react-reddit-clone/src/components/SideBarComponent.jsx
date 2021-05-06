@@ -24,7 +24,7 @@ class SideBarComponent extends Component {
         return (
             <div>
                 <div className="sidebar">
-                    <img src="https://www.redditstatic.com/desktop2x/img/id-cards/home-banner@2x.png" />
+                    <img src="https://www.redditstatic.com/desktop2x/img/id-cards/home-banner@2x.png" alt='reddit-logo'/>
                     <div style={{textAlign: "center", fontSize: "1em"}}>
                         Welcome to Spring Reddit Clone home page.
                         Come here to check in with your favorite subreddits.

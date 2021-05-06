@@ -17,12 +17,22 @@ class AuthService {
 }
 
 axios.interceptors.request.use(
-    config => {
+    request => {
+        if ( 
+            request.url.includes('refresh') || 
+            request.url.includes('login') ||
+            (request.url.includes('/api/posts') &&  request.method.includes('GET')) ||
+            (request.url.includes('/api/subreddit') && request.method.includes('GET')) ||
+            (request.url.includes('/api/comments') && request.method.includes('GET'))
+        ) {
+            return request;
+        }
+
         const token = localStorage.getItem('authenticationToken');
         if (token) {
-            config.headers['Authorization'] = 'Bearer ' + token;
+            request.headers['Authorization'] = 'Bearer ' + token;
         }
-        return config;
+        return request;
     },
     error => {
         Promise.reject(error)

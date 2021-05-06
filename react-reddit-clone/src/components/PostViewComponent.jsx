@@ -53,7 +53,7 @@ class PostViewComponent extends Component {
         console.log("inputs : " + JSON.stringify(comment));
 
         CommentService.createComment(comment).then(res => {
-            console.log(res);
+
             CommentService.getAllCommentsForPost(this.state.id).then((res) => {
                 this.setState({comments: res.data});
             });

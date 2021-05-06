@@ -10,7 +10,10 @@ import SubredditListComponent from './components/SubredditListComponent';
 import PostViewComponent from './components/PostViewComponent';
 import UserProfileComponent from './components/UserProfileComponent';
 
+import AuthRoute from './AuthRoute';
+
 function App() {
+
   return (
     <div className="App">
       <Router>
@@ -18,15 +21,16 @@ function App() {
           <HeaderComponent />
           <div className="container">
             <Switch>
-              <Route path="/" exact component={LoginComponent}></Route>
+              <Route path="/" exact component={HomeComponent}></Route>
               <Route path="/home" component={HomeComponent}></Route>
               <Route path="/login" component={LoginComponent}></Route>
               <Route path="/signup" component={SignUpComponent}></Route>
-              <Route path="/create-post" component={CreatePostComponent}></Route>
-              <Route path="/create-subreddit" component={CreateSubredditComponent}></Route>
+
+              <AuthRoute path="/create-post" component={CreatePostComponent}></AuthRoute>
+              <AuthRoute path="/create-subreddit" component={CreateSubredditComponent}></AuthRoute>
               <Route path="/subreddits-list" component={SubredditListComponent}></Route>
               <Route path="/view-post/:id" component={PostViewComponent}></Route>
-              <Route path="/user-profile/:username" component={UserProfileComponent}></Route>
+              <AuthRoute path="/user-profile/:username" component={UserProfileComponent}></AuthRoute>
             </Switch>
           </div>
         </div>

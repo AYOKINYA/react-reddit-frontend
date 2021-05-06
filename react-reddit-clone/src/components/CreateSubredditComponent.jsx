@@ -35,7 +35,6 @@ class CreateSubredditComponent extends Component {
         console.log("inputs : " + JSON.stringify(subreddit));
 
         SubredditService.createSubreddit(subreddit).then(res => {
-            console.log(res);
             this.props.history.push('/subreddits-list');
         });
     }

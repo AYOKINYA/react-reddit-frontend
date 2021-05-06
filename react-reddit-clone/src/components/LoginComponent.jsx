@@ -37,11 +37,13 @@ class LoginComponent extends Component {
         console.log("inputs : " + JSON.stringify(loginInfo));
 
         AuthService.login(loginInfo).then(res => {
-            console.log(res);
+
             localStorage.setItem('authenticationToken', res.data.authenticationToken);
             localStorage.setItem('username', res.data.username);
             localStorage.setItem('refreshToken', res.data.refreshToken);
             localStorage.setItem('expiresAt', res.data.expiresAt);
+
+            this.props.history.push('/home');
         })
 
     }
