@@ -35,6 +35,8 @@ class HeaderComponent extends Component {
             localStorage.removeItem('username');
             localStorage.removeItem('refreshToken');
             localStorage.removeItem('expiresAt');
+
+            this.props.history.push('/');
         });
     }
 

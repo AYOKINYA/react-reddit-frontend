@@ -24,7 +24,7 @@ class PostTileComponent extends Component {
                     (post) => (
                 <div className="row post" key={post.id}>
                     <div className="col-md-1">
-                        <VoteButtonComponent voteCount={post.voteCount}/>
+                        <VoteButtonComponent post={post}/>
                     </div>
 
                     <div className="col-md-11">

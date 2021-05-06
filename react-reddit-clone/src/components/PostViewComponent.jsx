@@ -77,7 +77,7 @@ class PostViewComponent extends Component {
                     <div className="col-md-9">
                         <div className="row post" key={this.state.post.id}>
                             <div className="col-md-1">
-                                <VoteButtonComponent voteCount={this.state.post.voteCount}/>
+                                <VoteButtonComponent post={this.state.post}/>
                             </div>
                             <div className="col-md-11">
                                 <span className="subreddit-info">
