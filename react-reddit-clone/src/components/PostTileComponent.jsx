@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
 import { Link,  withRouter } from 'react-router-dom';
+import { faComments } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import '../css/PostTileComponent.css';
 import VoteButtonComponent from './VoteButtonComponent';
@@ -12,6 +14,7 @@ class PostTileComponent extends Component {
         
         this.viewPost = this.viewPost.bind(this);
     }
+
 
     viewPost(id) {
         this.props.history.push(`/view-post/${id}`);
@@ -46,8 +49,9 @@ class PostTileComponent extends Component {
                         </div>
                         <hr />
                         <span>
-                            <button className="btn btn-success btnComments">Comments({post.commentCount})</button>
-                            <button className="btn btn-info" onClick={() => this.viewPost(post.id)}>Read Post</button>
+                            <FontAwesomeIcon icon={faComments} className="btnComments"></FontAwesomeIcon>Comments({post.commentCount})
+                            <button className="login" onClick={() => this.viewPost(post.id)}>
+                            Read Post</button>
                         </span>
                     </div>
                 </div>

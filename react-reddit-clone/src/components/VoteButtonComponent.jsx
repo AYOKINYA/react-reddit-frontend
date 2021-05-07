@@ -4,6 +4,9 @@ import '../css/VoteButtonComponent.css';
 import PostService from '../services/PostService';
 import VoteService from '../services/VoteService';
 
+import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 class VoteButtonComponent extends Component {
 
     constructor(props) {
@@ -48,11 +51,11 @@ class VoteButtonComponent extends Component {
             <div>
                 <div className="d-flex flex-column votebox">
                     <div className="p-2">
-                        <button className="upvote" onClick={() => this.vote("UPVOTE")}>Upvote</button>
+                        <FontAwesomeIcon icon={faArrowUp} className="upvote" onClick={() => this.vote("UPVOTE")}>Upvote</FontAwesomeIcon>
                     </div>
                     <div className="p-2 votecount">{this.state.post.voteCount}</div>
                     <div className="p-2">
-                        <button className="downvote" onClick={() => this.vote("DOWNVOTE")}>Downvote</button>
+                        <FontAwesomeIcon icon={faArrowDown} className="downvote" onClick={() => this.vote("DOWNVOTE")}>Downvote</FontAwesomeIcon>
                     </div>
                 </div>
             </div>
