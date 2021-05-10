@@ -59,7 +59,7 @@ class UserProfileComponent extends Component {
                     {this.state.comments.map((comment) =>(
                         <div className="comment" key={comment.id}>
                         <div className="username">
-                            <Link to={"/user/" + comment.username}>{comment.userName}</Link>
+                            <Link to={"/user-profile/" + comment.username}>{comment.userName}</Link>
                         </div>
                         <div>
                             <p>{comment.duration}</p>

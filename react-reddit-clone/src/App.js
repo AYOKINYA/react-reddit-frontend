@@ -11,6 +11,7 @@ import PostViewComponent from './components/PostViewComponent';
 import UserProfileComponent from './components/UserProfileComponent';
 
 import AuthRoute from './AuthRoute';
+import SubredditViewComponent from './components/SubredditViewComponent';
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
               <Route path="/subreddits-list" component={SubredditListComponent}></Route>
               <Route path="/view-post/:id" component={PostViewComponent}></Route>
               <AuthRoute path="/user-profile/:username" component={UserProfileComponent}></AuthRoute>
+              <Route path="/view-subreddit/:id" component={SubredditViewComponent}></Route>
             </Switch>
           </div>
         </div>

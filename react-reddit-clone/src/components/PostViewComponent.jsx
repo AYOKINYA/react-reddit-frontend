@@ -129,7 +129,7 @@ class PostViewComponent extends Component {
                                                 (comment) => (
                                             <div className="comment" key={comment.id}>
                                             <div className="username">
-                                                <Link to={"/user/" + comment.userName}>{comment.userName}</Link>
+                                                <Link to={"/user-profile/" + comment.userName}>{comment.userName}</Link>
                                             </div>
                                             <div>
                                                 <p>{comment.duration}</p>

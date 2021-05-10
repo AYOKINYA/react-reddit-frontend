@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import '../css/CreateSubredditComponent.css';
 import SubredditService from '../services/SubredditService';
 
-
 class CreateSubredditComponent extends Component {
 
     constructor(props) {
@@ -16,6 +15,7 @@ class CreateSubredditComponent extends Component {
 
         this.changeHandler = this.changeHandler.bind(this);
         this.createSubreddit = this.createSubreddit.bind(this);
+        this.discard = this.discard.bind(this);
     }
 
     changeHandler = (event) => {
@@ -39,10 +39,14 @@ class CreateSubredditComponent extends Component {
         });
     }
 
+    discard = (e) => {
+        e.preventDefault();
+        this.props.history.push('/home');
+    }
+
     render() {
         return (
-            <div>
-                 <div>
+                <div>
                 <div className="container">
                     <div className="row">
                         <div className="create-subreddit-container">
@@ -56,7 +60,7 @@ class CreateSubredditComponent extends Component {
                                 placeholder="Description"></textarea>
                             <div>
                                 <div style={{marginTop: "5px"}} className="float-right">
-                                <button className="btnDiscard">Discard</button>
+                                <button className="btnDiscard" onClick={this.discard}>Discard</button>
                                 <button className="btnCreateSubreddit" onClick={this.createSubreddit}>Create</button>
                                 </div>
                             </div>
@@ -79,8 +83,6 @@ class CreateSubredditComponent extends Component {
                         </div>
                     </div>
                     </div>
-            </div>
-            
             </div>
         );
     }

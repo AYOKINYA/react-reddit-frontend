@@ -19,6 +19,7 @@ class CreatePostComponent extends Component {
 
         this.changeHandler = this.changeHandler.bind(this);
         this.createPost = this.createPost.bind(this);
+        this.discard = this.discard.bind(this);
     }
 
     changeHandler = (event) => {
@@ -49,6 +50,11 @@ class CreatePostComponent extends Component {
 
     }
 
+    discard = (e) => {
+        e.preventDefault();
+        this.props.history.push('/home');
+    }
+
     render() {
         return (
            <div>
@@ -77,7 +83,7 @@ class CreatePostComponent extends Component {
 
                         <span>
                             <div style={{marginTop: "5px"}} className="float-right">
-                            <button className="btnDiscard">Discard</button>
+                            <button className="btnDiscard" onClick={this.discard}>Discard</button>
                             <button className="btnCreatePost" onClick={this.createPost}>Post</button>
                             </div>
                         </span>

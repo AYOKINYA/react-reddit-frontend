@@ -36,7 +36,7 @@ class PostTileComponent extends Component {
                                 <Link to="/home" className="posturl">{post.subredditName}</Link>
                             </span>
                             <span>
-                                . Posted by <Link to={"/user/" + post.userName}>{post.userName}</Link>
+                                . Posted by <Link to={"/user-profile/" + post.userName}>{post.userName}</Link>
                             </span>
                             <span> . {post.duration} </span>
                         </span>
@@ -50,8 +50,7 @@ class PostTileComponent extends Component {
                         <hr />
                         <span>
                             <FontAwesomeIcon icon={faComments} className="btnComments"></FontAwesomeIcon>Comments({post.commentCount})
-                            <button className="login" onClick={() => this.viewPost(post.id)}>
-                            Read Post</button>
+                            <button className="login" onClick={() => this.viewPost(post.id)}>Read Post</button>
                         </span>
                     </div>
                 </div>
