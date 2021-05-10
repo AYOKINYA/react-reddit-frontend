@@ -18,6 +18,14 @@ class PostService {
         return axios.get(BASE_URL + '/by-user/' + username);
     }
 
+    deletePost(id) {
+        return axios.delete(BASE_URL + '/' + id);
+    }
+
+    editPost(id, post) {
+        return axios.put(BASE_URL + '/' + id, post);
+    }
+
 }
 
 export default new PostService();

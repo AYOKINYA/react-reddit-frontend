@@ -11,6 +11,14 @@ class SubredditService {
         return axios.post(BASE_URL, subreddit);
     }
 
+    deleteSubreddit(id) {
+        return axios.delete(BASE_URL + '/' + id);
+    }
+
+    editSubreddit(id, subreddit) {
+        return axios.put(BASE_URL + '/' + id, subreddit);
+    }
+
 }
 
 export default new SubredditService();

@@ -24,6 +24,7 @@ class PostViewComponent extends Component {
 
         this.changeHandler = this.changeHandler.bind(this);
         this.createComment = this.createComment.bind(this);
+        this.deletePost = this.deletePost.bind(this);
     }
 
     componentDidMount() {
@@ -60,12 +61,25 @@ class PostViewComponent extends Component {
         });
     }
 
+    deletePost(id) {
+        PostService.deletePost(id).then((res) => {
+            this.props.history.push('/');
+        });
+    }
+
     getUsername() {
         if (this.state.post.userName) {
             return <Link to={"/home"} className="username">{this.state.post.userName}</Link>
         } else {
             return <Link to={"/home"} className="username">Anonymous</Link>
         }
+    }
+
+    isOwner() {
+        if (this.state.post.userName === localStorage.getItem("username")) {
+            return true;
+        }
+        return false;
     }
 
     render() {
@@ -89,6 +103,9 @@ class PostViewComponent extends Component {
                                         <span> . {this.state.post.duration} </span>
                                         by {this.getUsername()}
                                     </span>
+                                    {
+                                        this.isOwner() && <button className="btn btn-danger float-right" onClick={() => this.deletePost(this.state.post.id)}>DELETE</button>
+                                    }
                                 </span>
                                 <hr />
                                 <div className="post-title">
