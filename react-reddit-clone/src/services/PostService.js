@@ -18,6 +18,10 @@ class PostService {
         return axios.get(BASE_URL + '/by-user/' + username);
     }
 
+    getAllPostsBySubreddit(id) {
+        return axios.get(BASE_URL + '/by-subreddit/' + id);
+    }
+
     deletePost(id) {
         return axios.delete(BASE_URL + '/' + id);
     }

@@ -62,9 +62,11 @@ class PostViewComponent extends Component {
     }
 
     deletePost(id) {
-        PostService.deletePost(id).then((res) => {
-            this.props.history.push('/');
-        });
+            if (confirm("Are you sure?")) {
+            PostService.deletePost(id).then((res) => {
+                this.props.history.push('/');
+            });
+        }
     }
 
     getUsername() {
