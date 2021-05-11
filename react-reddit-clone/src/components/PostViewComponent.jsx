@@ -25,6 +25,7 @@ class PostViewComponent extends Component {
         this.changeHandler = this.changeHandler.bind(this);
         this.createComment = this.createComment.bind(this);
         this.deletePost = this.deletePost.bind(this);
+        this.editPost = this.editPost.bind(this);
     }
 
     componentDidMount() {
@@ -62,11 +63,15 @@ class PostViewComponent extends Component {
     }
 
     deletePost(id) {
-            if (confirm("Are you sure?")) {
+            if (window.confirm("Are you sure?")) {
             PostService.deletePost(id).then((res) => {
                 this.props.history.push('/');
             });
         }
+    }
+
+    editPost(id) {
+        this.props.history.push(`/edit-post/${id}`);
     }
 
     getUsername() {
@@ -107,6 +112,9 @@ class PostViewComponent extends Component {
                                     </span>
                                     {
                                         this.isOwner() && <button className="btn btn-danger float-right" onClick={() => this.deletePost(this.state.post.id)}>DELETE</button>
+                                    }
+                                    {    
+                                        this.isOwner() && <button className="btn btn-info float-right" onClick={() => this.editPost(this.state.post.id)} style={{paddingRight: "15px"}}>Edit</button>
                                     }
                                 </span>
                                 <hr />
