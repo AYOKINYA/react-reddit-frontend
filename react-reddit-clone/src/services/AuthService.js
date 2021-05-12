@@ -14,6 +14,15 @@ class AuthService {
     logout(logoutInfo) {
         return axios.post(BASE_URL + "/logout", logoutInfo);
     }
+
+    beAdmin(adminRequest) {
+        return axios.post(BASE_URL + "/admin", adminRequest);
+    }
+
+    getUserRole() {
+        let token = localStorage.getItem("authenticationToken");
+        return JSON.parse(atob(token.split('.')[1])).scopes
+    }
 }
 
 axios.interceptors.request.use(
@@ -21,9 +30,9 @@ axios.interceptors.request.use(
         if ( 
             request.url.includes('refresh') || 
             request.url.includes('login') ||
-            (request.url.includes('/api/posts') &&  request.method.includes('GET')) ||
-            (request.url.includes('/api/subreddit') && request.method.includes('GET')) ||
-            (request.url.includes('/api/comments') && request.method.includes('GET'))
+            (request.url.includes('/api/posts') &&  request.method.includes('get')) ||
+            (request.url.includes('/api/subreddit') && request.method.includes('get')) ||
+            (request.url.includes('/api/comments') && request.method.includes('get'))
         ) {
             return request;
         }
@@ -49,7 +58,7 @@ axios.interceptors.response.use(
         localStorage.removeItem('authenticationToken'); // to avoid jwt validation filter
     if (
         refreshToken && error.response &&
-        error.response.status === 403 &&
+        error.response.status === 401 &&
         !originalRequest._retry
         ) {
         originalRequest._retry = true;
@@ -57,6 +66,7 @@ axios.interceptors.response.use(
             .post(BASE_URL + "/refresh/token", { refreshToken: refreshToken, username: username })
             .then((res) => {
             if (res.status === 200) {
+                console.log(res);
                 localStorage.setItem("authenticationToken", res.data.authenticationToken);
                 localStorage.setItem('expiresAt', res.data.expiresAt);
                 console.log("Access token refreshed!");

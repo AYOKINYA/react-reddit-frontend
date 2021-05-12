@@ -13,6 +13,7 @@ import UserProfileComponent from './components/UserProfileComponent';
 import AuthRoute from './AuthRoute';
 import SubredditViewComponent from './components/SubredditViewComponent';
 import EditPostComponent from './components/EditPostComponent';
+import AdminComponent from './components/AdminComponent';
 
 function App() {
 
@@ -34,7 +35,8 @@ function App() {
               <Route path="/view-post/:id" component={PostViewComponent}></Route>
               <AuthRoute path="/user-profile/:username" component={UserProfileComponent}></AuthRoute>
               <Route path="/view-subreddit/:id" component={SubredditViewComponent}></Route>
-              <Route path="/edit-post/:id" component={EditPostComponent}></Route>
+              <AuthRoute path="/edit-post/:id" component={EditPostComponent}></AuthRoute>
+              <AuthRoute path="/admin" component={AdminComponent}></AuthRoute>
             </Switch>
           </div>
         </div>

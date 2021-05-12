@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import PostService from '../services/PostService';
 import PostTileComponent from './PostTileComponent';
 import CommentService from '../services/CommentService';
+import AuthService from '../services/AuthService';
+
 
 import { Link } from 'react-router-dom';
 
@@ -17,9 +19,11 @@ class UserProfileComponent extends Component {
             posts: [],
             postLength: 0,
             comments: [],
-            commentLength: 0
+            commentLength: 0,
+            role: []
 
         }
+
     }
 
     componentDidMount() {
@@ -36,6 +40,10 @@ class UserProfileComponent extends Component {
                 commentLength: res.data.length
             });
         });
+
+        this.setState({
+            role: AuthService.getUserRole()
+    })
     }
 
     render() {
@@ -43,6 +51,7 @@ class UserProfileComponent extends Component {
             <div>
                 <div className="container">
                     <div>
+                        Your Role : {this.state.role[0]} <br />
                         Welcome <b>{this.state.username}</b>.<br /> You have posted <b>{this.state.postLength}</b> time(s) and commented
                         <b>{this.state.commentLength}</b> time(s).
                         You can check your post and comment history below.

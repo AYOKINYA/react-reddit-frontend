@@ -52,7 +52,7 @@ class HeaderComponent extends Component {
             onClick(e);
           }}
         >
-          <img className="account-icon" src="https://www.redditstatic.com/avatars/avatar_default_08_D4E815.png"></img>
+          <img className="account-icon" src="https://www.redditstatic.com/avatars/avatar_default_08_D4E815.png" alt="account icon"></img>
           {children}
         </a>
       ));
