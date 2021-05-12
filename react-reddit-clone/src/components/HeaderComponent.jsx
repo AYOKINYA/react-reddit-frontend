@@ -35,6 +35,11 @@ class HeaderComponent extends Component {
             localStorage.removeItem('refreshToken');
             localStorage.removeItem('expiresAt');
 
+            this.setState({
+                isLoggedIn: (localStorage.getItem("refreshToken") != null),
+                username: localStorage.getItem("username") 
+            })
+
             this.props.history.push('/');
         });
     }

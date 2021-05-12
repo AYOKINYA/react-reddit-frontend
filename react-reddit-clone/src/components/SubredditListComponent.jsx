@@ -3,6 +3,7 @@ import SubredditService from '../services/SubredditService';
 
 import { Link } from 'react-router-dom';
 import SideBarComponent from './SideBarComponent';
+import AuthService from '../services/AuthService';
 
 class SubredditListComponent extends Component {
 
@@ -12,6 +13,8 @@ class SubredditListComponent extends Component {
         this.state = {
             subreddits: [],
         }
+
+        this.deleteSubreddit = this.deleteSubreddit.bind(this);
     }
 
     componentDidMount() {
@@ -19,6 +22,18 @@ class SubredditListComponent extends Component {
             this.setState({subreddits: res.data});
         });
     }
+
+    deleteSubreddit(id) {
+
+        if (window.confirm("Are you sure?")) {
+        SubredditService.deleteSubreddit(id).then((res) => {
+            SubredditService.getAllSubreddits().then((res) => {
+                this.setState({subreddits: res.data});
+            });
+        });
+        }
+    }
+
     render() {
         return (
             <div>
@@ -33,6 +48,7 @@ class SubredditListComponent extends Component {
                                 (subreddit) => (
                                     <li key={subreddit.id}>
                                         <Link to={"/view-subreddit/" + subreddit.id}>{subreddit.name}</Link>
+                                        { AuthService.isAdmin() && <button className="btn btn-danger" onClick={() => this.deleteSubreddit(subreddit.id)} style={{marginLeft: "15px"}}>DELETE</button>}
                                     </li>
                                 )
                             )

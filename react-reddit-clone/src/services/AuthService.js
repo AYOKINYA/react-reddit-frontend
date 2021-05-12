@@ -19,9 +19,20 @@ class AuthService {
         return axios.post(BASE_URL + "/admin", adminRequest);
     }
 
-    getUserRole() {
+    getUserRoles() {
         let token = localStorage.getItem("authenticationToken");
-        return JSON.parse(atob(token.split('.')[1])).scopes
+        if (token)
+            return JSON.parse(atob(token.split('.')[1])).scopes;
+
+        return null;
+    }
+
+    isAdmin() {
+        let roles = this.getUserRoles();
+        if (roles && roles[0] === "ROLE_ADMIN")
+            return true;
+
+        return false;
     }
 }
 
@@ -66,7 +77,6 @@ axios.interceptors.response.use(
             .post(BASE_URL + "/refresh/token", { refreshToken: refreshToken, username: username })
             .then((res) => {
             if (res.status === 200) {
-                console.log(res);
                 localStorage.setItem("authenticationToken", res.data.authenticationToken);
                 localStorage.setItem('expiresAt', res.data.expiresAt);
                 console.log("Access token refreshed!");

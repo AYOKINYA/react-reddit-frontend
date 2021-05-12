@@ -47,18 +47,10 @@ class AdminComponent extends Component {
         });
     }
 
-    isAdmin() {
-        let role = AuthService.getUserRole();
-        if (role && role[0] === "ROLE_ADMIN")
-            return true;
-        
-        return false;
-    }
-
     render() {
         return (
             <div>
-                { !this.isAdmin() &&
+                { !AuthService.isAdmin() &&
                 <div>
                     <h3>Are you Admin ?</h3>
                     <form>
@@ -70,7 +62,7 @@ class AdminComponent extends Component {
                 </div>
                  }
                  {
-                     this.isAdmin() &&
+                     AuthService.isAdmin() &&
                      <div>
                          <h3>Hi admin</h3>
                      </div>

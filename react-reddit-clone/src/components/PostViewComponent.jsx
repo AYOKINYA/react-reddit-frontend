@@ -4,6 +4,7 @@ import SideBarComponent from './SideBarComponent';
 import SubredditSideBarComponent from './SubredditSideBarComponent';
 
 import PostService from '../services/PostService';
+import AuthService from '../services/AuthService';
 import CommentService from '../services/CommentService';
 
 import { Link } from 'react-router-dom';
@@ -26,6 +27,9 @@ class PostViewComponent extends Component {
         this.createComment = this.createComment.bind(this);
         this.deletePost = this.deletePost.bind(this);
         this.editPost = this.editPost.bind(this);
+        this.isOwner = this.isOwner.bind(this);
+        this.isEligible = this.isEligible.bind(this);
+
     }
 
     componentDidMount() {
@@ -86,6 +90,15 @@ class PostViewComponent extends Component {
         if (this.state.post.userName === localStorage.getItem("username")) {
             return true;
         }
+
+        return false;
+    }
+
+    isEligible() {
+        if (AuthService.isAdmin() || this.isOwner()) {
+            return true;
+        }
+
         return false;
     }
 
@@ -111,7 +124,7 @@ class PostViewComponent extends Component {
                                         by {this.getUsername()}
                                     </span>
                                     {
-                                        this.isOwner() && <button className="btn btn-danger float-right" onClick={() => this.deletePost(this.state.post.id)}>DELETE</button>
+                                        this.isEligible() && <button className="btn btn-danger float-right" onClick={() => this.deletePost(this.state.post.id)}>DELETE</button>
                                     }
                                     {    
                                         this.isOwner() && <button className="btn btn-info float-right" onClick={() => this.editPost(this.state.post.id)} style={{paddingRight: "15px"}}>Edit</button>
